@@ -1,0 +1,15 @@
+@page "{id:guid?}"
+@model HorseClub.RazorWebApp.KhoiND.Pages.Horses.DetailsModel
+@{
+    ViewData["Title"] = "Horse details";
+}
+
+<h1>@Model.Horse.Name</h1>
+<hr />
+
+<partial name="_HorseDetails" model="Model.Horse" />
+
+<div class="d-flex gap-2">
+    <a asp-page="Edit" asp-route-id="@Model.Horse.Id" class="btn btn-primary">Edit</a>
+    <a asp-page="Index" class="btn btn-outline-secondary">Back to list</a>
+</div>

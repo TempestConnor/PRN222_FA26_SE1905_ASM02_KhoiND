@@ -1,0 +1,26 @@
+@page "{id:guid?}"
+@model HorseClub.RazorWebApp.KhoiND.Pages.Horses.EditModel
+@{
+    ViewData["Title"] = "Edit horse";
+}
+
+<h1>Edit horse</h1>
+<hr />
+
+<form method="post">
+    @* Columns the form doesn't show but the update must keep. *@
+    <input type="hidden" asp-for="Horse.Id" />
+    <input type="hidden" asp-for="Horse.CreatedAt" />
+    <input type="hidden" asp-for="Horse.CreatedBy" />
+
+    <partial name="_HorseForm" for="Horse" />
+
+    <div class="mt-4 d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a asp-page="Index" class="btn btn-outline-secondary">Back to list</a>
+    </div>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

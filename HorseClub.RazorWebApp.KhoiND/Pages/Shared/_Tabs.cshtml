@@ -1,0 +1,30 @@
+@* Glider tabs from Uiverse.io (see wwwroot/css/tabs.css). Each radio carries its page URL;
+   picking one slides the glider and then loads that page. *@
+@{
+    var tabs = new[]
+    {
+        (Folder: "Horses", Label: "Horses"),
+        (Folder: "Owners", Label: "Owners"),
+        (Folder: "StaffProfiles", Label: "Staff"),
+        (Folder: "Suppliers", Label: "Suppliers"),
+        (Folder: "SupplyCategories", Label: "Categories"),
+        (Folder: "SupplyItems", Label: "Supply items")
+    };
+    // "/Horses/Edit" -> "Horses"
+    var current = ViewContext.RouteData.Values["page"]?.ToString()?.Split('/', StringSplitOptions.RemoveEmptyEntries)[0];
+}
+
+<div class="tabs-container">
+    <div class="tabs">
+        @for (var i = 0; i < tabs.Length; i++)
+        {
+            var id = $"tab-radio-{i + 1}";
+            <input type="radio" id="@id" name="tabs" autocomplete="off"
+                   value="@Url.Page($"/{tabs[i].Folder}/Index")"
+                   checked="@(string.Equals(current, tabs[i].Folder, StringComparison.OrdinalIgnoreCase))"
+                   onchange="location.href = this.value">
+            <label class="tab" for="@id">@tabs[i].Label</label>
+        }
+        <span class="glider"></span>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+@page
+@model HorseClub.RazorWebApp.KhoiND.Pages.StaffProfiles.IndexModel
+@{
+    ViewData["Title"] = "Staff";
+}
+
+<h1 class="mb-3">Staff</h1>
+
+@if (Model.Items.Count == 0)
+{
+    <div class="alert alert-info">No staff found.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Full name</th>
+                    <th>Phone</th>
+                    <th>Job title</th>
+                    <th>Hire date</th>
+                    <th>Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.FullName</td>
+                        <td>@item.Phone</td>
+                        <td>@((StaffJobTitle)item.JobTitle)</td>
+                        <td>@item.HireDate?.ToString("yyyy-MM-dd")</td>
+                        <td>@(item.IsActive ? "Yes" : "No")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <p class="text-muted small">@Model.Items.Count staff member(s)</p>
+}
